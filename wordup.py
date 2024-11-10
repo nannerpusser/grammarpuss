@@ -7,7 +7,7 @@ from anagrams import *
 
 
 ASSETS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets")
-DICTIONARY_FILENAME = os.path.join(ASSETS, "twl06.txt")
+DICTIONARY_FILENAME = os.path.join(ASSETS, "wordament_dictionary.txt")
 
 def CenterWindowToDisplay(
     Screen: ctk.CTkToplevel, width: int, height: int, scale_factor: float = 1.0):
@@ -72,10 +72,10 @@ class ToplevelWindow(ctk.CTkToplevel):
         apply_theme_to_titlebar(self)
         self.title("Anagrams")
         self.geometry(CenterWindowToDisplay(self, 400, 500))
-        self.label = ctk.CTkLabel(self, text="Min. 4 letters", font=(ctk.CTkFont(family="Segoe UI", size=18)))
+        self.label = ctk.CTkLabel(self, text="Scrabble Solver/Anagram Finder", font=(ctk.CTkFont(family="Segoe UI", size=16)))
         self.label.pack(padx=5, pady=10)
 
-        self.entry = ctk.CTkEntry(self, width=300, height=30, font=(ctk.CTkFont(family="Segoe UI", size=14)), placeholder_text="Letters")
+        self.entry = ctk.CTkEntry(self, width=300, height=30, font=(ctk.CTkFont(family="Segoe UI", size=14)), placeholder_text="min. 4 letters")
         self.entry.pack(padx=5, pady=10) if self.entry else 0
 
         self.go_button = ctk.CTkButton(self, width=100, height=30, text="Get Anagrams", fg_color="#33b40b", hover_color="#2a9b0a", command=self.get_anagrams, font=(ctk.CTkFont(family="Segoe UI", size=16)))
@@ -87,8 +87,8 @@ class ToplevelWindow(ctk.CTkToplevel):
         self.close_button = ctk.CTkButton(self, width=100, height=30, text="Close", fg_color="#c8434e", hover_color="#b91a3d", command=self.withdraw_top, font=(ctk.CTkFont(family="Segoe UI", size=16)))
         self.close_button.pack(padx=5, pady=10, side="bottom") 
         
-        self.list = ctk.CTkTextbox(self,font=(ctk.CTkFont(family="Segoe UI", size=14)), activate_scrollbars=True, wrap=WORD)
-        self.list.pack(padx=5, pady=5, fill="both", expand=True, side ="top")
+        self.list = ctk.CTkTextbox(self,font=(ctk.CTkFont(family="Segoe UI", size=16)), activate_scrollbars=True, wrap=WORD)
+        self.list.pack(padx=5, pady=5, ipadx=5, ipady=5, fill="both", expand=True, side ="top")
 
     def get_anagrams(self):
         trie = AnagramSolver.make_trie(AnagramSolver.read_words(DICTIONARY_FILENAME))
@@ -97,10 +97,9 @@ class ToplevelWindow(ctk.CTkToplevel):
         words = sorted(words, key=lambda x: (len(x), x))
         words = [word for word in words if len(word) >= 4]
 
-        self.list.delete("1.0", tk.END)
         for word in words:
-            self.list.insert(tk.END, word + ", ")
-
+            self.list.delete("1.0", tk.END)
+            self.list.insert(tk.END, ', '.join(words))
     def clear(self):
         self.list.delete("1.0", tk.END)
 
@@ -125,11 +124,6 @@ class WordamentGUI(ctk.CTk):
         self.minsize(self.width, self.height)
         self.maxsize(self.width, self.height)
 
-        self.stage = ctk.CTkCanvas(self, height=self.height * 0.3, width=self.height * 0.3, highlightthickness=0, bg="#2b2b2b")
-        self.stage.config(borderwidth=0, highlightthickness=0)
-        self.stage.grid(row=0, column=0, sticky="nsew", columnspan=2, rowspan=2, ipadx=2, ipady=2)
-        self.stage.grid_columnconfigure((0, 1, 2), weight=2)
-        self.stage.grid_rowconfigure((0, 1, 2), weight=2)
 
         self.entries = []
 
@@ -187,9 +181,8 @@ class WordamentGUI(ctk.CTk):
         self.grid_rowconfigure((0, 1), weight=1, uniform="both")
 
         # frame (top left)
-        board_frame = ctk.CTkFrame(self, bg_color="transparent")
+        board_frame = ctk.CTkFrame(self, bg_color="transparent", fg_color="#d1ba35")
         board_frame.grid(row=0, column=0)
-
         self.entry_vars = [[ctk.StringVar() for _ in range(4)] for _ in range(4)]
 
         for i in range(4):
@@ -204,14 +197,14 @@ class WordamentGUI(ctk.CTk):
                 self.entry_vars[i][j].trace_add('write', lambda *args, r=i, c=j: self.validate_input(r, c))
             self.entries.append(row)
         # frame (top right)
-        button_frame = ctk.CTkFrame(self, bg_color="black", fg_color="transparent", border_width=0)
+        button_frame = ctk.CTkFrame(self, bg_color="black", fg_color="transparent", border_width=0, corner_radius=2)
         button_frame.grid(row=0, column=1, padx=6, pady=6, ipadx=5, ipady=5, sticky="ew")
         button_frame.grid_rowconfigure((0, 1, 2, 3), weight=1)
         button_frame.grid_columnconfigure((0, 1, 2), weight=1)
         pywinstyles.set_opacity(widget=button_frame, color="black", value=1.0)
 
 
-        self.anagram_button = ctk.CTkButton(button_frame, text="Anagram Tool", command=self.open_toplevel, fg_color="#8bc1c9", hover_color="#66a4e2", text_color="#ffffff", border_width=1, corner_radius=3, font=(self.entry_font, 20, "bold"), width=130, height=20)
+        self.anagram_button = ctk.CTkButton(button_frame, text="Anagram Tool", command=self.open_toplevel, fg_color="#7cd0dd", hover_color="#66a4e2", text_color="#ffffff", border_width=1, corner_radius=3, font=(self.entry_font, 20, "bold"), width=130, height=20)
         self.anagram_button.grid(row=0, column=1, padx=5, pady=25, sticky="nsew")
 
         self.solve_button = ctk.CTkButton(button_frame, text="Solve", command=self.solve, fg_color="#33b40b", text_color="#ffffff", border_width=1, hover_color="#3ace0d", corner_radius=3, font=(self.entry_font, 20, "bold"), width=130, height=20)
@@ -225,7 +218,7 @@ class WordamentGUI(ctk.CTk):
 
         # Treeview frame (bottom, spanning width)
 
-        tree_frame = ctk.CTkFrame(self, bg_color="black",corner_radius=2, border_width=0)
+        tree_frame = ctk.CTkFrame(self, bg_color="black", corner_radius=2, border_width=0)
         tree_frame.grid(row=4, column=0, columnspan=2, padx=5, pady=5, ipadx=2, ipady=2, sticky="nsew")
         tree_frame.grid_rowconfigure((0, 1), weight=1, uniform="both")
         tree_frame.grid_columnconfigure((0, 1), weight=1, uniform="both")
@@ -272,15 +265,15 @@ class WordamentGUI(ctk.CTk):
         self.tree.pack(side=tk.LEFT, expand=True, fill="both", padx=3, pady=3)
 
         # Scrollbar for Treeview, had trouble keeping it slim and padded on y axis
-        self.scrollbar = ctk.CTkScrollbar(tree_frame, orientation="vertical", command=self.tree.yview, border_spacing=0, corner_radius=2)
+        self.scrollbar = ctk.CTkScrollbar(tree_frame, orientation="vertical", command=self.tree.yview, border_spacing=2, corner_radius=2)
         self.scrollbar.configure(bg_color="black")
         self.tree.configure(yscroll=self.scrollbar.set)
         self.scrollbar.pack(side="right", fill="y", ipadx=1, pady=2, padx=1, ipady=2)
         pywinstyles.set_opacity(widget=self.scrollbar, color="black", value=.90)
 
         # Configure tag for alternating row colors
-        self.tree.tag_configure('oddrow', background='#2c2f30', font=(self.other_font, 12))
-        self.tree.tag_configure('evenrow', background='#212325', font=(self.other_font, 12))
+        self.tree.tag_configure('oddrow', background='#2c2f30', font=(self.other_font, 14))
+        self.tree.tag_configure('evenrow', background='#212325', font=(self.other_font, 14))
 
 
 
