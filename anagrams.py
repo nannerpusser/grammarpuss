@@ -1,6 +1,6 @@
 from collections import Counter
 import os
-
+from wordup import *
 ASSETS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets")
 DICTIONARY_FILENAME = os.path.join(ASSETS, "twl06.txt")
 
@@ -45,17 +45,6 @@ class AnagramSolver:
 
 
 
-def index():
-    from gui import AnagramWindow
-
-    trie = AnagramSolver.make_trie(AnagramSolver.read_words(DICTIONARY_FILENAME))
-    letters = AnagramWindow.entry.get().lower()
-    words = [word for word in AnagramSolver.anagram(letters, trie)]
-    words = sorted(words, key=lambda x: (len(x), x))
-    words = [word for word in words if len(word) >= 4]
-
-    return words
-
 if __name__ == "__main__":
-    index()
-    
+    app = AnagramSolver()
+    app.run()
