@@ -1,6 +1,6 @@
 
 
-### Some word game tools. Best, most complete python Wordament Solver on GitHub, if I do say so myself. 
+### Some word game tools. Best, most complete python Wordament Solver on GitHub, if I do say so myself. Even if the code is janky and always takes the scenic route.
 
 This is actually a total rework of a previous version, which implemented a very dogshit OCR for grabbing the digrams automatically. I call this version the Fuck OCR Edition. 
 
