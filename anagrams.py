@@ -1,8 +1,9 @@
 from collections import Counter
 import os
-from wordup import *
+
+
 ASSETS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets")
-DICTIONARY_FILENAME = os.path.join(ASSETS, "twl06.txt")
+DICTIONARY_FILENAME = os.path.join(ASSETS, "wordament_dictionary.txt")
 
 class AnagramSolver:
     def __init__(self):
