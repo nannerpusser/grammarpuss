@@ -7,6 +7,7 @@ from anagrams import *
 
 
 ASSETS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets")
+DICTIONARY_FILENAME = os.path.join(ASSETS, "twl06.txt")
 
 def CenterWindowToDisplay(
     Screen: ctk.CTkToplevel, width: int, height: int, scale_factor: float = 1.0):
@@ -77,11 +78,14 @@ class ToplevelWindow(ctk.CTkToplevel):
         self.entry = ctk.CTkEntry(self, width=300, height=30, font=(ctk.CTkFont(family="Segoe UI", size=14)), placeholder_text="Letters")
         self.entry.pack(padx=5, pady=10) if self.entry else 0
 
-        self.go_button = ctk.CTkButton(self, width=100, height=30, text="Get Anagrams", command=self.get_anagrams, font=(ctk.CTkFont(family="Segoe UI", size=16)))
+        self.go_button = ctk.CTkButton(self, width=100, height=30, text="Get Anagrams", fg_color="#33b40b", hover_color="#2a9b0a", command=self.get_anagrams, font=(ctk.CTkFont(family="Segoe UI", size=16)))
         self.go_button.pack(padx=5, pady=10, side="bottom")
 
         self.clear_button = ctk.CTkButton(self, width=100, height=30, text="Clear", command=self.clear, font=(ctk.CTkFont(family="Segoe UI", size=16)))
         self.clear_button.pack(padx=5, pady=10, side="bottom")
+
+        self.close_button = ctk.CTkButton(self, width=100, height=30, text="Close", fg_color="#c8434e", hover_color="#b91a3d", command=self.withdraw_top, font=(ctk.CTkFont(family="Segoe UI", size=16)))
+        self.close_button.pack(padx=5, pady=10, side="bottom") 
         
         self.list = ctk.CTkTextbox(self,font=(ctk.CTkFont(family="Segoe UI", size=14)), activate_scrollbars=True, wrap=WORD)
         self.list.pack(padx=5, pady=5, fill="both", expand=True, side ="top")
@@ -109,8 +113,8 @@ class WordamentGUI(ctk.CTk):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         apply_theme_to_titlebar(self)
-        load_font = os.path.join(ASSETS, "Segoe-Sans-Text.ttf")
 
+        load_font = "Segoe UI"
         self.entry_font = (ctk.CTkFont(family=load_font, size=26))
         self.other_font = (ctk.CTkFont(family=load_font, size=16))
 
