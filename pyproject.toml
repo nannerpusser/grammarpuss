@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "grammarpuss"
+version = "0.1.0"
+description = ""
+authors = ["original nannerpuss <41687803+nannerpusser@users.noreply.github.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+customtkinter = "^5.2.2"
+pywinstyles = "^1.8"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
