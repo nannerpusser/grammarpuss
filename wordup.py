@@ -29,6 +29,7 @@ def apply_theme_to_titlebar(window):
         pywinstyles.apply_style(window, "dark")
         window.wm_attributes("-alpha", "0.9")
         window.wm_attributes("-alpha", "1.0")
+        
 class TrieNode:
     def __init__(self):
         self.children = {}
@@ -116,13 +117,13 @@ class WordamentGUI(ctk.CTk):
         load_font = "Segoe UI"
         self.entry_font = (ctk.CTkFont(family=load_font, size=26))
         self.other_font = (ctk.CTkFont(family=load_font, size=16))
-
+        self.resizable(False, False)
         self.width = int(self.winfo_screenwidth() * 0.5)
         self.height = int(self.winfo_screenheight() * 0.66)
         self.title("Wordup: Wordament Solver")
         self.geometry(CenterWindowToDisplay(self, self.width, self.height, 1.0))
-        self.minsize(self.width, self.height)
-        self.maxsize(self.width, self.height)
+        #self.minsize(self.width, self.height)
+        #self.maxsize(self.width, self.height)
 
 
         self.entries = []
@@ -145,6 +146,7 @@ class WordamentGUI(ctk.CTk):
 
     def quit(self):
         self.destroy()
+        
 
     def clear_board(self):
         for row in self.entries:
@@ -335,8 +337,6 @@ class WordamentGUI(ctk.CTk):
             self.tree.delete(item)
         self.tree.insert('', 'end', values=('Solving...', '', ''))
         threading.Thread(target=solve_thread, daemon=True).start() # totally uncessary threading operation
-
-
 
     def display_results(self):
     # Sort by length by default
