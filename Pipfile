@@ -6,11 +6,7 @@ name = "pypi"
 [packages]
 customtkinter = "*"
 pywinstyles = "*"
-pillow = "*"
 ctkgradient = "*"
-
-[dev-packages]
-ipykernel = "*"
 
 [requires]
 python_version = "3.12"
