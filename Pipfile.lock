@@ -1,0 +1,63 @@
+{
+    "_meta": {
+        "hash": {
+            "sha256": "68ffeaba689878caf092dbb5f86fdc47e313059cb99bb27f30c48c3acb2f6670"
+        },
+        "pipfile-spec": 6,
+        "requires": {
+            "python_version": "3.12"
+        },
+        "sources": [
+            {
+                "name": "pypi",
+                "url": "https://pypi.org/simple",
+                "verify_ssl": true
+            }
+        ]
+    },
+    "default": {
+        "ctkgradient": {
+            "hashes": [
+                "sha256:84a0cf40c71364a6f9e49360079549f1471a389acc98fd3e14cf35b9b34b6ab5",
+                "sha256:901ee57dbf60323a751a36a3e6c9853a9d730241dc1c827a3a89cf1a17270088"
+            ],
+            "index": "pypi",
+            "version": "==0.3.2"
+        },
+        "customtkinter": {
+            "hashes": [
+                "sha256:14ad3e7cd3cb3b9eb642b9d4e8711ae80d3f79fb82545ad11258eeffb2e6b37c",
+                "sha256:fd8db3bafa961c982ee6030dba80b4c2e25858630756b513986db19113d8d207"
+            ],
+            "index": "pypi",
+            "markers": "python_version >= '3.7'",
+            "version": "==5.2.2"
+        },
+        "darkdetect": {
+            "hashes": [
+                "sha256:a7509ccf517eaad92b31c214f593dbcf138ea8a43b2935406bbd565e15527a85",
+                "sha256:b5428e1170263eb5dea44c25dc3895edd75e6f52300986353cd63533fe7df8b1"
+            ],
+            "markers": "python_version >= '3.6'",
+            "version": "==0.8.0"
+        },
+        "packaging": {
+            "hashes": [
+                "sha256:09abb1bccd265c01f4a3aa3f7a7db064b36514d2cba19a2f694fe6150451a759",
+                "sha256:c228a6dc5e932d346bc5739379109d49e8853dd8223571c7c5b55260edc0b97f"
+            ],
+            "markers": "python_version >= '3.8'",
+            "version": "==24.2"
+        },
+        "pywinstyles": {
+            "hashes": [
+                "sha256:17d89c6bc91569b676b71c00400ec958548302809858966c4cf447bb16a7e407",
+                "sha256:7a087b1f45ef8d572b440712817dbbef8ae90793ab7fcc51b060851d2d6f301c"
+            ],
+            "index": "pypi",
+            "markers": "python_version >= '3.8'",
+            "version": "==1.8"
+        }
+    },
+    "develop": {}
+}

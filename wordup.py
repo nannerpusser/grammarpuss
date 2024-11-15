@@ -117,14 +117,12 @@ class WordamentGUI(ctk.CTk):
         load_font = "Segoe UI"
         self.entry_font = (ctk.CTkFont(family=load_font, size=26))
         self.other_font = (ctk.CTkFont(family=load_font, size=16))
-        self.resizable(False, False)
-        self.width = int(self.winfo_screenwidth() * 0.5)
-        self.height = int(self.winfo_screenheight() * 0.66)
+        self.width = 750
+        self.height = 680
+        self.maxsize = (1024, 768)
+        self.minsize = (480, 380)
         self.title("Wordup: Wordament Solver")
         self.geometry(CenterWindowToDisplay(self, self.width, self.height, 1.0))
-        #self.minsize(self.width, self.height)
-        #self.maxsize(self.width, self.height)
-
 
         self.entries = []
 
@@ -138,12 +136,14 @@ class WordamentGUI(ctk.CTk):
     def open_toplevel(self):
         if self.toplevel_window is None or not self.toplevel_window.winfo_exists():
             self.toplevel_window = ToplevelWindow(self)  # create window if its None or destroyed
-            self.toplevel_window.focus_set()
-            self.iconify() # hide the main window
+            self.toplevel_window.attributes("-topmost", 1)
+            self.after(100, lambda: self.toplevel_window.attributes("-topmost", 0))
         else:
             self.toplevel_window.focus() 
+            self.toplevel_window.attributes("-topmost", 1)
+            self.after(100, lambda: self.toplevel_window.attributes("-topmost", 0))
             self.iconify()  # if window exists focus it
-
+            
     def quit(self):
         self.destroy()
         
