@@ -44,7 +44,7 @@ Two Trie-based solutions - a Wordament solver and a general Un-scrambler/Scrabbl
 Before getting started with grammarpuss, ensure your runtime environment meets the following requirements:
 
 - **Programming Language:** Python ^3.10
-- **Package Manager:** Pipenv for venv management and dependencies. Pipfile and lock included (or just pip install yourself, or just handle it manually since the depends are very minimal).
+- **Package Manager:** Pipenv for venv management and dependencies. Pipfile included. Repo does contain files not in manifest, but none are implemented in code nor have other requirements if they were (theme coloring shenanigans).
 
 
 ###  Installation
@@ -73,20 +73,17 @@ Install grammarpuss using one of the following methods:
 ```
 
 
-
-
 ###  Usage
 Run grammarpuss using the following command:
 **Using `pipenv`** &nbsp; [<img align="center" src="https://img.shields.io/badge/Pipenv-3775A9.svg?style={badge_style}&logo=pypi&logoColor=white" />](https://pipenv.pypa.io/)
 
 ```sh
-❯ pipenv shell
-❯ python wordup.py
+❯ pipenv run python wordup.py
 ```
 ---
 ##  Project Roadmap
 
-- lol, yeah right.
+- Dead End Road.
 
 ---
 
@@ -99,12 +96,10 @@ Run grammarpuss using the following command:
 
 ##  License
 
-This project is protected under the [SELECT-A-LICENSE](https://choosealicense.com/licenses) License. For more details, refer to the [LICENSE](https://choosealicense.com/licenses/) file.
+This project is protected under the SUCH CODE, WOW license. You can have it, but if you fix the dogshit, please give it back to me via PR <3.
 
 ---
 
 ##  Acknowledgments
 
-- List any resources, contributors, inspiration, etc. here.
-
----
+- Your mom, for sure.
